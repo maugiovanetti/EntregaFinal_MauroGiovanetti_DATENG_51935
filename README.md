@@ -36,8 +36,6 @@ En este bloque, se define la clase "ETL_Clima" que realizará todo el proceso de
 ```python
 
 class ETL_Clima(ETL_Spark):
- 
-
 ```
 
 ## 4. Constructor y atributos de la clase:
@@ -142,8 +140,6 @@ Una vez que se completan todas las transformaciones, el DataFrame resultante se 
 #### H. Retorno del DataFrame transformado:
 
 Finalmente, el método devuelve el DataFrame transformado, que contiene los datos climáticos limpios y preparados para su carga en la base de datos Redshift.
-
-Espero que esta descripción más detallada te ayude a comprender mejor las transformaciones que se realizan en el código. Si tienes alguna otra pregunta o necesitas más detalles sobre alguna parte específica de las transformaciones, no dudes en preguntar.
 
 
 ```python
