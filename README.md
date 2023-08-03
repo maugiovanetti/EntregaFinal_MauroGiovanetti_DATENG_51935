@@ -1,4 +1,4 @@
-## 1. Importación de módulos:
+# 1. Importación de módulos:
 
 En esta sección, se importan los módulos necesarios para el funcionamiento del script, incluyendo los módulos de PySpark, "requests", "datetime", y otros.
 
@@ -13,7 +13,7 @@ from pyspark.sql.types import StringType
 
 ```
 
-## 2. Definición de variables y lista de provincias:
+# 2. Definición de variables y lista de provincias:
 
 En esta parte, se define la API key de OpenWeatherMap y se crea una lista llamada "provincias" que contiene los nombres de las provincias de Argentina para las cuales se obtendrán los datos climáticos.
 
