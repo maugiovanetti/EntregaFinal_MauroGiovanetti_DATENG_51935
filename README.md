@@ -1,17 +1,36 @@
 # Entrega Final 
 
-## Comentarios:
+## Comentarios de Configuración Inicial:
 
 * El entorno del DAG esta confeccionado sobre el Docker-Compose del entregable 3. En este, se incorporó un archivo de configuración, que debería estar ubicado a la misma altura que el ``docker-compose.yml`` 
-
-Linea agregada al Docker del Entregable 3 es la siguiente:
+  En este archivo se debe realizar la configuración  ``[smtp] `` 
+  Linea agregada al Docker del Entregable 3 es la siguiente:
 
 ```python
 
- ./airflow.cfg:/opt/airflow/airflow.cfg
+    ./airflow.cfg:/opt/airflow/airflow.cfg
 ```
 
+* En la carpeta dags, antes de ejecutarlo, se debería incluir un mail en las configuraciones del DAG.
+```python
+  with DAG(
+    dag_id="etl_clima",
+    default_args={
+        "owner": "Mauro Giovanetti",
+        "start_date": datetime(2023, 7, 1),
+        "retries": 0,
+        "retry_delay": timedelta(seconds=5),
+        'catchup': False,
+        'email': [''], #Completar Mail
+        'email_on_failure': True,
+        'email_on_retry': True,
+    },
+    description="ETL de la tabla clima",
+    schedule_interval="@daily",
+    catchup=False,
+) as dag:
 
+```
 
 
 
