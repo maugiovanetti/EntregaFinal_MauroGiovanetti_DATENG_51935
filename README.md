@@ -3,7 +3,8 @@
 ## Comentarios de Configuración Inicial:
 
 * El entorno del DAG esta confeccionado sobre el Docker-Compose del entregable 3. En este, se incorporó un archivo de configuración, que debería estar ubicado a la misma altura que el ``docker-compose.yml`` 
-  En este archivo se debe realizar la configuración  ``[smtp] `` 
+  En este archivo se debe realizar la configuración  ``[smtp] ``.
+  
   Linea agregada al Docker del Entregable 3 es la siguiente:
 
 ```python
