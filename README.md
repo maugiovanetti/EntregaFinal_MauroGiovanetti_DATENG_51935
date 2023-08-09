@@ -48,7 +48,7 @@ api_key = ""
 
 # Descripción del proceso ETL_Clima
 
-# 1. Requerimientos e Importación de módulos:
+# 1. Importación de módulos:
 
 
 En esta sección, se importan los módulos necesarios para el funcionamiento del script, incluyendo los módulos de PySpark, "requests", "datetime", y otros.
