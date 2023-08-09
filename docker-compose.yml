@@ -65,6 +65,7 @@ x-airflow-common:
     - ./plugins:/opt/airflow/plugins
     - ./scripts:/opt/airflow/scripts
     - ./scripts/postgresql-42.5.2.jar:/tmp/drivers/postgresql-42.5.2.jar
+    - ./airflow.cfg:/opt/airflow/airflow.cfg
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     postgres:

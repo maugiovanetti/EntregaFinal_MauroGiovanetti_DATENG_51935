@@ -12,7 +12,7 @@ from commons import ETL_Spark
 
 # Configurar la API key de OpenWeatherMap
 
-api_key = "cb3c7af6f8a3112d069b2cd42e3d2651"
+api_key = ""
 
 # Definir listado de provincias de Argentina
 

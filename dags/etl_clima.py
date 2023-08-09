@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS clima (
     name VARCHAR(50),
     timezone INT,
     visibility INT,
-    process_date VARCHAR(10),
     lon FLOAT,
     lat FLOAT,
     weather_description VARCHAR(300),
@@ -28,7 +27,8 @@ CREATE TABLE IF NOT EXISTS clima (
     humidity VARCHAR(50),
     wind_speed FLOAT,
     amplitud_termica FLOAT,
-    temp_promedio FLOAT
+    temp_promedio FLOAT,
+    process_date VARCHAR(10)
 ) 
 DISTKEY(process_date)
 SORTKEY(process_date, name);
@@ -64,7 +64,16 @@ defaul_args = {
 
 with DAG(
     dag_id="etl_clima",
-    default_args=defaul_args,
+    default_args={
+        "owner": "Mauro Giovanetti",
+        "start_date": datetime(2023, 7, 1),
+        "retries": 0,
+        "retry_delay": timedelta(seconds=5),
+        'catchup': False,
+        'email': [''], #Completar Mail
+        'email_on_failure': True,
+        'email_on_retry': True,
+    },
     description="ETL de la tabla clima",
     schedule_interval="@daily",
     catchup=False,
