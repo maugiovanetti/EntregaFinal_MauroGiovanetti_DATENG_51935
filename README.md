@@ -1,4 +1,27 @@
-# 1. Importación de módulos:
+# Entrega Final 
+
+## Comentarios:
+
+'# .' El entorno del DAG esta confeccionado sobre el Docker-Compose del entregable 3. En este, se incorporó un archivo de configuración, que debería estar ubicado a la misma altura que el ``docker-compose.yml`` 
+
+Linea agregada al Docker del Entregable 3 es la siguiente:
+
+```python
+
+ ./airflow.cfg:/opt/airflow/airflow.cfg
+```
+
+
+
+
+
+
+
+
+# Descripción del proceso 
+
+# 1. Requerimientos e Importación de módulos:
+
 
 En esta sección, se importan los módulos necesarios para el funcionamiento del script, incluyendo los módulos de PySpark, "requests", "datetime", y otros.
 
