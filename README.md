@@ -2,7 +2,7 @@
 
 ## Comentarios:
 
-'# .' El entorno del DAG esta confeccionado sobre el Docker-Compose del entregable 3. En este, se incorporó un archivo de configuración, que debería estar ubicado a la misma altura que el ``docker-compose.yml`` 
+* El entorno del DAG esta confeccionado sobre el Docker-Compose del entregable 3. En este, se incorporó un archivo de configuración, que debería estar ubicado a la misma altura que el ``docker-compose.yml`` 
 
 Linea agregada al Docker del Entregable 3 es la siguiente:
 
