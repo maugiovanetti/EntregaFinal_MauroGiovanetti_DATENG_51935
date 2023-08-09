@@ -1,4 +1,4 @@
-# Entrega Final 
+# Entrega Final DATENG 51935
 
 ## Comentarios de Configuración Inicial:
 
@@ -11,7 +11,8 @@
     ./airflow.cfg:/opt/airflow/airflow.cfg
 ```
 
-* En la carpeta dags, antes de ejecutarlo, se debería incluir un mail en las configuraciones del DAG.
+* En la carpeta dags, se debería incluir un mail en las configuraciones del DAG.
+  
 ```python
   with DAG(
     dag_id="etl_clima",
@@ -32,12 +33,20 @@
 
 ```
 
+* En la carpeta scripts, en `` ETL_Clima.py ``. Se debe agregar la contraseña recibida en la entrega.
+ 
+  
+```python
+
+# Configurar la API key de OpenWeatherMap
+
+api_key = ""
+
+```
 
 
 
-
-
-# Descripción del proceso 
+# Descripción del proceso ETL_Clima
 
 # 1. Requerimientos e Importación de módulos:
 
@@ -46,12 +55,15 @@ En esta sección, se importan los módulos necesarios para el funcionamiento del
 
 ```python
 
+
 import requests
 from datetime import datetime, timedelta
 from os import environ as env
+
 from pyspark.sql.functions import concat, col, lit, when, expr, to_date, round
-from commons import ETL_Spark
 from pyspark.sql.types import StringType
+
+from commons import ETL_Spark
 
 ```
 
@@ -62,11 +74,35 @@ En esta parte, se define la API key de OpenWeatherMap y se crea una lista llamad
 ```python
 
 # Configurar la API key de OpenWeatherMap
-api_key = "cb3c7af6f8a3112d069b2cd42e3d2651"
+api_key = #API_Key
 
 # Definir listado de provincias de Argentina
-provincias = ["Buenos Aires", "Cordoba", "Santa Fe", "Mendoza", "Tucuman", "Parana", "Salta", "Resistencia", "Corrientes", "Misiones", "Santiago del Estero", "San Juan", "San Salvador de Jujuy", "Viedma", "Formosa", "Neuquen", "Rawson", "San Luis", "Catamarca", "La Rioja, AR", "Santa Rosa, AR", "Río Gallegos", "Ushuaia"]
 
+provincias = [
+    "Buenos Aires",
+    "Cordoba",
+    "Santa Fe",
+    "Mendoza",
+    "Tucuman",
+    "Parana",
+    "Salta",
+    "Resistencia",
+    "Corrientes",
+    "Misiones",
+    "Santiago del Estero",
+    "San Juan",
+    "San Salvador de Jujuy",
+    "Viedma",
+    "Formosa",
+    "Neuquen",
+    "Rawson",
+    "San Luis",
+    "Catamarca",
+    "La Rioja, AR",
+    "Santa Rosa, AR",
+    "Río Gallegos",
+    "Ushuaia",
+]
 
 ```
 
@@ -114,33 +150,53 @@ El método "extract()" se encarga de extraer los datos climáticos de cada provi
 
 ```python
 
-    # Extrae datos de la API
-        # """
+    def extract(self):
+        """
+        # Extrae datos de la API
+        #"""
         print(">>> [E] Extrayendo datos de la API...")
-        
-        # # Realiza una consulta para establecer esquema
-        url_esquema = f"https://api.openweathermap.org/data/2.5/weather?q={provincias[0]}&appid={api_key}&units=metric"
+
+        # Realiza una consulta para establecer esquema
+
+        url_esquema = (
+            f"https://api.openweathermap.org/data/2.5/weather?q={provincias[0]}"
+            f"&appid={api_key}&units=metric"
+        )
+
         respuesta_esquema = requests.get(url_esquema)
         ejemplo_esquema = respuesta_esquema.json()
 
-        # # Obtener el esquema a partir de los datos de la primera provincia
-        esquema = self.spark.read.json(self.spark.sparkContext.parallelize([ejemplo_esquema]), multiLine=True).schema
+        # Obtener el esquema a partir de los datos de la primera provincia
 
-        # # Crear el DataFrame "df" vacío con el esquema obtenido
+        esquema = self.spark.read.json(
+            self.spark.sparkContext.parallelize([ejemplo_esquema]), multiLine=True
+        ).schema
+
+        # Crear el DataFrame "df" vacío con el esquema obtenido
         df = self.spark.createDataFrame([], esquema)
 
-        # # Leer los datos para cada provincia y agregarlos al DataFrame
+        # Leer los datos para cada provincia y agregarlos al DataFrame
         for provincia in provincias:
-             url = f"https://api.openweathermap.org/data/2.5/weather?q={provincia}&appid={api_key}&units=metric"
-             respuesta = requests.get(url)
-             data = respuesta.json()
-             # Crear un DataFrame con los datos de la provincia actual
-             df_prov = self.spark.read.json(self.spark.sparkContext.parallelize([data]), multiLine=True, schema=df.schema)
-             # Agregar los datos de la provincia actual al DataFrame final
-             df = df.union(df_prov)
+            url = (
+                f"https://api.openweathermap.org/data/2.5/weather?q={provincia}"
+                f"&appid={api_key}&units=metric"
+            )
+            respuesta = requests.get(url)
+            data = respuesta.json()
 
-        # # Mostrar el resultado
-       
+            # Crear un DataFrame con los datos de la provincia actual
+
+            df_prov = self.spark.read.json(
+                self.spark.sparkContext.parallelize([data]),
+                multiLine=True,
+                schema=df.schema,
+            )
+            # Agregar los datos de la provincia actual al DataFrame final
+
+            df = df.union(df_prov)
+
+        # Mostrar el resultado
+
         df.printSchema()
         df.show()
 
