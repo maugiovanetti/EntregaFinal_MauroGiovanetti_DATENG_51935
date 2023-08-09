@@ -225,11 +225,11 @@ La columna 'wind' contiene información sobre la velocidad del viento. En esta t
 En esta etapa, se eliminan algunas columnas innecesarias que no aportan información relevante para el análisis climático. Las columnas eliminadas son:                 'clouds', 'sys', 'id', 'cod', 'base', y 'dt'.
         
 #### F. Formato de datos y cálculos adicionales:
-1. Agregar el símbolo porcentual a la columna 'humidity': Se concatena el símbolo de porcentaje '%' a la columna 'humidity' para indicar que                              representa un porcentaje (por ejemplo, "50%" para una humedad del 50%).
+* Agregar el símbolo porcentual a la columna 'humidity': Se concatena el símbolo de porcentaje '%' a la columna 'humidity' para indicar que                              representa un porcentaje (por ejemplo, "50%" para una humedad del 50%).
         
-2. Agregar una columna nueva que sea la amplitud térmica: Se crea una nueva columna llamada 'amplitud_termica' que representa la diferencia                               entre la temperatura máxima ('temp_max') y la temperatura mínima ('temp_min') de la provincia.
+* Agregar una columna nueva que sea la amplitud térmica: Se crea una nueva columna llamada 'amplitud_termica' que representa la diferencia                               entre la temperatura máxima ('temp_max') y la temperatura mínima ('temp_min') de la provincia.
         
-3. Agregar una columna nueva que sea la temperatura promedio de la provincia: Se crea una nueva columna llamada 'temp_promedio' que representa                            la temperatura promedio entre la temperatura máxima y la temperatura mínima de la provincia.
+* Agregar una columna nueva que sea la temperatura promedio de la provincia: Se crea una nueva columna llamada 'temp_promedio' que representa                            la temperatura promedio entre la temperatura máxima y la temperatura mínima de la provincia.
         
 #### G. Mostrar los datos transformados:
 Una vez que se completan todas las transformaciones, el DataFrame resultante se muestra en la consola para que se pueda verificar cómo se han                         aplicado las modificaciones.
